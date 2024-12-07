@@ -1,0 +1,48 @@
+CREATE OR REPLACE FUNCTION public.crear_torneo(
+    p_id_torneo integer,
+    p_id_evento integer,
+    p_nombre character varying,
+    p_tipo character varying,
+    p_id_juego integer
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $function$
+BEGIN
+    INSERT INTO Tournaments (IdTorneo, IdEvento, Nombre, Tipo, IdJuego)
+    VALUES (p_id_torneo, p_id_evento, p_nombre, p_tipo, p_id_juego);
+END;
+$function$
+
+CREATE OR REPLACE FUNCTION public.crear_evento(
+    p_id_evento integer,
+    p_nombre character varying,
+    p_descripcion text,
+    p_fecha_inicio date,
+    p_fecha_fin date,
+    p_ubicacion character varying
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $function$
+BEGIN
+    INSERT INTO Events (IdEvento, Nombre, Descripcion, FechaInicio, FechaFin, Ubicacion)
+    VALUES (p_id_evento, p_nombre, p_descripcion, p_fecha_inicio, p_fecha_fin, p_ubicacion);
+END;
+$function$
+
+CREATE OR REPLACE FUNCTION public.crear_jugador(
+    p_id_participante integer,
+    p_id_torneo integer,
+    p_nombre character varying,
+    p_contacto character varying,
+    p_rol character varying
+)
+RETURNS void
+LANGUAGE plpgsql
+AS $function$
+BEGIN
+    INSERT INTO participants (IdParticipante, IdTorneo, Nombre, Contacto, Rol)
+    VALUES (p_id_participante, p_id_torneo, p_nombre, p_contacto, p_rol);
+END;
+$function$
